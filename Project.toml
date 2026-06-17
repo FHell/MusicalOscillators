@@ -1,0 +1,13 @@
+name = "MusicalOscillators"
+uuid = "7a9c3e2b-1d4f-4b6a-9c8e-2f5a1b3c4d6e"
+authors = ["FHell"]
+version = "0.1.0"
+
+[compat]
+julia = "1.6"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
