@@ -47,16 +47,21 @@ using Test
     end
 
     @testset "envelope shape" begin
+        # vel=127/127=1, mu=2.0 ⇒ A_on=2.0; damp=3.0 ⇒ A_off=-3.0
         notes = [Note(69, 127, 1.0, 1.0, 0)]
-        cfg = OscillatorConfig(attack = 0.1, release = 0.2)
+        cfg = OscillatorConfig(mu = 2.0, damp = 3.0, attack = 0.1, release = 0.2)
         p = MusicalOscillators.OscParams(notes, cfg)
 
-        @test MusicalOscillators.envelope(p, 1, 0.5) == 0.0          # before onset
-        @test MusicalOscillators.envelope(p, 1, 1.0) == 0.0          # at onset
-        @test MusicalOscillators.envelope(p, 1, 1.05) ≈ 0.5 atol = 1e-6  # mid-attack
-        @test MusicalOscillators.envelope(p, 1, 1.5) ≈ 1.0           # sustain
-        @test MusicalOscillators.envelope(p, 1, 2.1) ≈ 0.5 atol = 1e-6  # mid-release
-        @test MusicalOscillators.envelope(p, 1, 3.0) == 0.0          # fully released
+        A_off = -cfg.damp              # -3.0
+        A_on  = 1.0 * cfg.mu           #  2.0  (vel=1, mu=2)
+        A_mid = (A_off + A_on) / 2     # -0.5  (mid-attack / mid-release)
+
+        @test MusicalOscillators.envelope(p, 1, 0.5) == A_off         # before onset
+        @test MusicalOscillators.envelope(p, 1, 1.0) == A_off         # at onset (ramp starts)
+        @test MusicalOscillators.envelope(p, 1, 1.05) ≈ A_mid atol = 1e-6   # mid-attack
+        @test MusicalOscillators.envelope(p, 1, 1.5) ≈ A_on           # sustain
+        @test MusicalOscillators.envelope(p, 1, 2.1) ≈ A_mid atol = 1e-6   # mid-release
+        @test MusicalOscillators.envelope(p, 1, 3.0) == A_off         # fully released
     end
 
     @testset "synthesize basic properties" begin
