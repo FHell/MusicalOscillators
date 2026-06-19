@@ -26,10 +26,13 @@ export Note, MidiData, OscillatorConfig
 export read_midi, write_midi, parse_smf, note_frequency
 export read_wav, write_wav
 export synthesize, midi_to_wav
+export RealtimeSynth, activate_note!, deactivate_note!,
+       shuffle_coupling!, set_coupling!, generate_samples!
 
 include("midi.jl")
 include("ode.jl")
 include("wav.jl")
+include("realtime.jl")
 
 """
     midi_to_wav(midi_path, wav_path; samplerate = 44100,
