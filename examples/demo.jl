@@ -24,6 +24,6 @@ wav_path = joinpath(@__DIR__, "demo.wav")
 write_midi(midi_path, notes)
 println("Wrote MIDI: ", midi_path)
 
-config = OscillatorConfig(mu = 3.0, coupling = 0.03)
+config = OscillatorConfig(coupling = 0.03)   # mu=10, damp=5 from defaults
 midi_to_wav(midi_path, wav_path; samplerate = 44100, config = config)
 println("Wrote WAV:  ", wav_path)
