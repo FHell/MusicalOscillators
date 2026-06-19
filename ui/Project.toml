@@ -1,0 +1,10 @@
+[deps]
+GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+MusicalOscillators = "7a9c3e2b-1d4f-4b6a-9c8e-2f5a1b3c4d6e"
+PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
+
+[compat]
+julia = "1.8"
+
+[sources.MusicalOscillators]
+path = ".."
