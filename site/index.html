@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musical Oscillators — Piano UI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Musical Oscillators</h1>
+  <p style="font-size:0.85rem;color:#666;margin-bottom:20px;">
+    Stuart-Landau coupled oscillator synthesis. Build a chord or melody, then synthesize.
+  </p>
+
+  <div class="layout">
+
+    <!-- Piano + Note Sequencer -->
+    <div class="panel">
+      <h2>Piano — C4 to B4</h2>
+      <div class="piano-container">
+        <div class="piano-keys" id="piano-keys" style="position:relative;width:308px;">
+          <!-- built by JS -->
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <h2>Note Sequencer</h2>
+        <ul class="note-list" id="note-list"></ul>
+        <div class="btn-row">
+          <button id="btn-add-note" class="btn-primary">Add selected note</button>
+          <button id="btn-clear-notes" class="btn-danger">Clear notes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="panel">
+      <h2>Controls</h2>
+      <div class="controls">
+
+        <div class="control-row">
+          <label>μ (peak gain)</label>
+          <input type="range" id="mu" min="1" max="20" step="1" value="10" />
+          <span class="value-display" id="mu-val">10</span>
+        </div>
+
+        <div class="control-row">
+          <label>κ (coupling)</label>
+          <input type="range" id="kappa" min="0" max="1" step="0.01" value="0.02" />
+          <span class="value-display" id="kappa-val">0.020</span>
+        </div>
+
+        <div class="control-row">
+          <label>Attack (s)</label>
+          <input type="range" id="attack" min="0.001" max="0.5" step="0.001" value="0.01" />
+          <span class="value-display" id="attack-val">0.010</span>
+        </div>
+
+        <div class="control-row">
+          <label>Release (s)</label>
+          <input type="range" id="release" min="0.01" max="1.0" step="0.01" value="0.15" />
+          <span class="value-display" id="release-val">0.150</span>
+        </div>
+
+        <div style="margin-top:8px;">
+          <button id="btn-synthesize" class="btn-primary" style="width:100%;padding:12px;font-size:1rem;">
+            ▶ Synthesize &amp; Play
+          </button>
+        </div>
+
+        <div id="status"></div>
+      </div>
+    </div>
+
+    <!-- Coupling Matrix -->
+    <div class="panel full-width">
+      <h2>12×12 Coupling Matrix (C4–B4)</h2>
+      <p style="font-size:0.75rem;color:#666;margin-bottom:12px;">
+        K[i,j] = coupling from oscillator j → i. Click or drag to toggle cells.
+        When any cell is set, matrix coupling replaces scalar κ (κ becomes the scale factor).
+      </p>
+
+      <div class="matrix-wrapper">
+        <div>
+          <div id="matrix-col-labels" class="matrix-col-labels"></div>
+          <div id="matrix-rows"></div>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top:14px;">
+        <button id="btn-matrix-shuffle" class="btn-secondary">Shuffle</button>
+        <button id="btn-matrix-clear" class="btn-secondary">Clear matrix</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
