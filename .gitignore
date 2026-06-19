@@ -6,3 +6,4 @@
 *.wav
 *.mid
 !examples/*.mid
+.claude/
