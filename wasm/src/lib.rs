@@ -216,7 +216,7 @@ fn core_synthesize(
     release_time: f64,
     tail: f64,
     gain: f64,
-    step_fn: &mut dyn FnMut(&mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, usize, &[f64], &[f64], &[f64], &[f64], f64, f64, f64, f64, f64),
+    step_fn: &mut dyn FnMut(&mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, &mut Vec<f64>, usize, &[f64], &[f64], &[f64], &[f64], f64, f64, f64, f64, f64, f64),
 ) -> Vec<f32> {
     let n = pitches.len();
     if n == 0 {
